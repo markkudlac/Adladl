@@ -7,4 +7,10 @@ class StaticController < ApplicationController
   def contact
   end
   
+  def adunit
+  end
+  
+  def test
+  end
+  
 end

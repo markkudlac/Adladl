@@ -4,8 +4,15 @@
   <title>Adladl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<% if current_page?(adunit_path) then %>
+  	<%= stylesheet_link_tag 'app_jqrymob', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'app_jqrymob', 'data-turbolinks-track' => true %>
+	<% else %>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<% end %>
+	
+  
   <%= csrf_meta_tags %>
 </head>
 <body>

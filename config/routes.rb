@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
 
 get "/contact", to: "static#contact"
+get "/test", to: "static#test"
+get "/adunit", to: "static#adunit"
 
   # You can have the root of your site routed with "root"
    root 'static#home'

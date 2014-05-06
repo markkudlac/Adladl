@@ -10,10 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require_tree .	Removed do to no mix of JQRYmobile
-//
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require static
+//= require jquery.mobile
 //= require turbolinks
-
