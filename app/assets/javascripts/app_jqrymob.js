@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require static
+//= require jqrymobinit.js
 //= require jquery.mobile
+//= require static
 //= require turbolinks
