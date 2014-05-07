@@ -3,7 +3,7 @@
 $(document).ready(function(){
 	
 	$("[id^=swiper]").swiperight(function() {  
-	    		  $("#adwrap2").text("RIGHT");
+//	    		  $("#adwrap2").text("RIGHT");
 						
 						$(":mobile-pagecontainer").pagecontainer("change",
 						 $("#page2"), {transition: "slide", reverse: true});
@@ -11,10 +11,10 @@ $(document).ready(function(){
 						.swipeleft(function() {  
 							$(":mobile-pagecontainer").pagecontainer("change",
 							 $("#page1"), {transition: "slide"});
-					    		  $("#adwrap1").text("LEFT");  
+//					    		  $("#adwrap1").text("LEFT");  
 						 })
 						.tap(function() {  
-					    		  $("#adwrap1").text("TAP");
+//					    		  $("#adwrap1").text("TAP");
 										$(":mobile-pagecontainer").pagecontainer("change",
 										$("#page2"), {transition: "flip"});
 						 })
