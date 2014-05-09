@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @advert.group %>
+</p>
+
+<p>
+  <strong>Adtype:</strong>
+  <%= @advert.adtype %>
+</p>
+
+<p>
+  <strong>Urlimg:</strong>
+  <%= @advert.urlimg %>
+</p>
+
+<p>
+  <strong>Urlhref:</strong>
+  <%= @advert.urlhref %>
+</p>
+
+<p>
+  <strong>Descript:</strong>
+  <%= @advert.descript %>
+</p>
+
+<%= link_to 'Edit', edit_advert_path(@advert) %> |
+<%= link_to 'Back', adverts_path %>

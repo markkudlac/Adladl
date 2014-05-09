@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Device:</strong>
+  <%= @ad_list.device_id %>
+</p>
+
+<p>
+  <strong>Advert:</strong>
+  <%= @ad_list.advert_id %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @ad_list.action %>
+</p>
+
+<%= link_to 'Edit', edit_ad_list_path(@ad_list) %> |
+<%= link_to 'Back', ad_lists_path %>

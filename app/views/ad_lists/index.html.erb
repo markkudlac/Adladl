@@ -1,0 +1,29 @@
+<h1>Listing ad_lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>Advert</th>
+      <th>Action</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ad_lists.each do |ad_list| %>
+      <tr>
+        <td><%= ad_list.device_id %></td>
+        <td><%= ad_list.advert_id %></td>
+        <td><%= ad_list.action %></td>
+        <td><%= link_to 'Show', ad_list %></td>
+        <td><%= link_to 'Edit', edit_ad_list_path(ad_list) %></td>
+        <td><%= link_to 'Destroy', ad_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ad list', new_ad_list_path %>

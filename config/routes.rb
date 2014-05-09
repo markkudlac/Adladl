@@ -3,9 +3,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
 
+  resources :devices, :adverts, :ad_lists
+  
 get "/contact", to: "static#contact"
 get "/test", to: "static#test"
 get "/adunit", to: "static#adunit"
+get "/devices", to: "devices#index"
+get "/adverts", to: "adverts#index"
+get "/ad_lists", to: "ad_lists#index"
+
 
   # You can have the root of your site routed with "root"
    root 'static#home'
