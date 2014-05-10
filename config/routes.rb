@@ -13,6 +13,10 @@ get "/adverts", to: "adverts#index"
 get "/ad_lists", to: "ad_lists#index"
 
 
+get "/api/getads/:tag/:lastid", to: "api#getads"
+
+
+
   # You can have the root of your site routed with "root"
    root 'static#home'
 

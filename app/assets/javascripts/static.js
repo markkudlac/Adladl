@@ -1,34 +1,3 @@
-/* Manage the adunit */
-
-$(document).ready(function(){
-	
-	$("[id^=swiper]").swiperight(function() {  
-//	    		  $("#adwrap2").text("RIGHT");
-						
-						$(":mobile-pagecontainer").pagecontainer("change",
-						 $("#page2"), {transition: "slide", reverse: true});
-		    		})
-						.swipeleft(function() {  
-							$(":mobile-pagecontainer").pagecontainer("change",
-							 $("#page1"), {transition: "slide"});
-//					    		  $("#adwrap1").text("LEFT");  
-						 })
-						.tap(function() {  
-//					    		  $("#adwrap1").text("TAP");
-										$(":mobile-pagecontainer").pagecontainer("change",
-										$("#page2"), {transition: "flip"});
-						 })
-						.on("swipedown", function() {
-											$(":mobile-pagecontainer").pagecontainer("change",
-											$("#page2"), {transition: "slidedown"});
-						})
-						.on("swipeup", function() {  
-								$(":mobile-pagecontainer").pagecontainer("change",
-								$("#page2"), {transition: "slidedown", reverse: true});
-						});							
-	
-})
-
 
 // Suport swipe up/down
 // This needs to load after JQuery Mobile

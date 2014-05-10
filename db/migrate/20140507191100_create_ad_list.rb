@@ -8,8 +8,9 @@ class CreateAdList < ActiveRecord::Migration
       t.timestamps
     end
     add_index :ad_lists, :device_id
+    add_index :ad_lists, :advert_id
     
-    #This key may not be required but ensure uniqu link
+    #This key may not be required but ensure unique link
     add_index :ad_lists, [:device_id, :advert_id], :unique => true
   end
 end

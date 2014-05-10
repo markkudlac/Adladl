@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140507191100) do
     t.datetime "updated_at"
   end
 
+  add_index "ad_lists", ["advert_id"], name: "index_ad_lists_on_advert_id"
   add_index "ad_lists", ["device_id", "advert_id"], name: "index_ad_lists_on_device_id_and_advert_id", unique: true
   add_index "ad_lists", ["device_id"], name: "index_ad_lists_on_device_id"
 
