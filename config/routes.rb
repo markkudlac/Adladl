@@ -14,8 +14,8 @@ get "/ad_lists", to: "ad_lists#index"
 
 
 get "/api/getads/:tag/:lastid", to: "api#getads"
-
-
+get "/api/exclude/:tag/:advert_id", to: "api#exclude"
+get "/api/keep/:tag/:advert_id", to: "api#keep"
 
   # You can have the root of your site routed with "root"
    root 'static#home'
