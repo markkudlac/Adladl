@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 get "/contact", to: "static#contact"
 get "/test", to: "static#test"
 get "/adunit", to: "static#adunit"
+get "/coupons", to: "static#coupons"
 get "/devices", to: "devices#index"
 get "/adverts", to: "adverts#index"
 get "/ad_lists", to: "ad_lists#index"
@@ -16,6 +17,8 @@ get "/ad_lists", to: "ad_lists#index"
 get "/api/getads/:tag/:lastid", to: "api#getads"
 get "/api/exclude/:tag/:advert_id", to: "api#exclude"
 get "/api/keep/:tag/:advert_id", to: "api#keep"
+get "/api/get_kept_coupons/:tag/", to: "api#get_kept_coupons"
+get "/api/get_kept_ads/:tag/", to: "api#get_kept_ads"
 
   # You can have the root of your site routed with "root"
    root 'static#home'

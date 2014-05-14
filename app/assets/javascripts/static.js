@@ -1,4 +1,19 @@
 
+
+function initAjax() {
+	
+	$(document).ajaxError(function(ev,xhdr,status,err) {
+		alert("Ajax error : "+err)
+		console.log(status)
+	})
+	
+//	$(document).ajaxStart(function() {
+//		console.log("Ajax Start")
+//	})
+}
+
+
+
 // Suport swipe up/down
 // This needs to load after JQuery Mobile
 

@@ -10,6 +10,9 @@ class StaticController < ApplicationController
   def adunit
   end
   
+  def coupons
+  end
+  
   def test
   end
   
