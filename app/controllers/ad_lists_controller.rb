@@ -1,5 +1,6 @@
 class AdListsController < ApplicationController
   before_action :set_ad_list, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /ad_lists
   # GET /ad_lists.json

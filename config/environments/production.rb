@@ -80,4 +80,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  #Set for Devise. Set localhost to domain for production
+   config.action_mailer.default_url_options = { :host => 'app24858184.mailgun.org' }
+   
+   # Set for exception notification email this is also in development env
+   config.middleware.use ExceptionNotifier,
+     email_prefix: 'Exception ERROR: ',
+     sender_address: 'noreply@app24858184.mailgun.org',
+     exception_recipients: 'mark.kudlac@adladl.com'
 end
