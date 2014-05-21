@@ -6,4 +6,4 @@
 			</div></div>
 				
 <%= javascript_tag(render :template => "layouts/adunit", :formats => [:js],
-	:locals => {:baseurl => geturl}) %>
+	:locals => {:baseurl => geturl, :prizemode => @prizemode, :devicetag => @devicetag}) %>

@@ -1,16 +1,16 @@
 /* Manage the adunit */
 
-var cur_ad;
-var devicetag = "mark";
+/* var devicetag = "mark"; */
+
 var admarker = 0;
 var timer = null;
-
+var prizeobj = null;
 
 $(document).ready(function(){
 	console.log("adunit document ready")
 	
 	initAjax();
-	getAds(devicetag, admarker);
+	getAds('<%= devicetag %>' , admarker);
 	
 })
 
@@ -22,13 +22,15 @@ function beginAdScrolling(){
 	timer = setInterval(function(){
 		loadNextAd();
 	}, 5000)
+	console.log("Interval set : "+timer)
 }
 
 
 function haltAdScrolling(){
 
-		if (timer != null) {
+	if (timer != null) {
 		clearInterval(timer)
+		console.log("scrolling halted : "+timer)
 		timer = null;
 	}
 }
@@ -38,9 +40,10 @@ function getAds(device, ad){
 	
 	$.getJSON('<%= baseurl %>' + "/api/getads/"+device+"/"+ad,null,function(data){
 		if (data && data.rtn == undefined) { appendAds(data) } else
-		{ alert("undefined")}
+		{ console.log("getAds data undefined")}
 	});
 }
+
 
 function appendAds(data){
 	
@@ -104,23 +107,13 @@ function setEvents(jqryobj){
 		.swipeleft(function(event) {
 			// delete from add list and mark as kept in db
 			event.preventDefault()
-			
-			keep_ad = $(this)
-			
-			xpg = $(this).prev(".adfind")
-			
-			if (xpg.length == 0) { 
-				xpg = $("body").children(".adfind:last")
-				
-				if ( xpg.length == 0) { 	// Removing last item
-					xpg = $("#adl0")}
+
+			if (<%= prizemode %>){
+				beginPrize($(this))
+			} else {
+				keepAd($(this))
 			}
-			
-			$(":mobile-pagecontainer").pagecontainer("change",
-			 xpg, {transition: "slide"});
-			 beginAdScrolling();
-			 
-			 manageAd(keep_ad, "keep")
+
 		 })
 		 
 		 .tap(function(event){
@@ -144,7 +137,10 @@ function setEvents(jqryobj){
 		 
 		 .on("vmouseup", function(event){
 			 event.preventDefault()
-			 beginAdScrolling()
+			 
+			 if (!<%= prizemode %>) {
+			 	beginAdScrolling()
+				}
 		 })
 		 
 		.on("swipedown", function(event){
@@ -165,6 +161,35 @@ function setEvents(jqryobj){
 				xpg, {transition: "slideup", allowSamePageTransition: true});
 				beginAdScrolling();
 		});							
+}
+
+
+
+function keepAd(keepobj){
+	
+	xpg = $(this).prev(".adfind")
+	
+	if (xpg.length == 0) { 
+		xpg = $("body").children(".adfind:last")
+		
+		if ( xpg.length == 0) { 	// Removing last item
+			xpg = $("#adl0")}
+	}
+	
+	$(":mobile-pagecontainer").pagecontainer("change",
+	 xpg, {transition: "slide"});
+	 beginAdScrolling();
+	 
+	 manageAd(keepobj, "keep")
+}
+
+
+function beginPrize(prizesel){
+	
+	prizeobj = prizesel
+	haltAdScrolling()
+	
+	console.log("prize selected")
 }
 
 
@@ -189,7 +214,7 @@ function manageAd(jqobj, action){
 	adid = extractPgId(jqobj)
 		
 	jqobj.remove()
-	$.getJSON('<%= baseurl %>' + "/api/"+ action + "/" + devicetag + "/" + 
+	$.getJSON('<%= baseurl %>' + "/api/"+ action + "/" + '<%= devicetag %>' + "/" + 
 		adid, null, function(data){
 			if (!data || !data.rtn) {
 				alert("Db error")
@@ -201,4 +226,28 @@ function manageAd(jqobj, action){
 function extractPgId(jqobj){
 	
 	return jqobj.attr("id").slice(2);
+}
+
+
+function prizewon(){
+	console.log("In prize won")
+	
+	if (prizeobj != null){
+		console.log("Prize kept")
+		keepAd(prizeobj)
+		prizeobj = null
+	}
+}
+
+
+function clearads(){
+
+	$.getJSON('<%= baseurl %>' + "/api/clearads/"+'<%= devicetag %>',null,function(data){
+		if (data && data.rtn == true) {
+			 console.log("ads cleared") 
+			 getAds('<%= devicetag %>' , admarker);
+	 	} else {
+			console.log("clear ads failed")
+		}
+	});
 }

@@ -30,6 +30,20 @@ class ApiController < ApplicationController
     set_ex_keep 1
   end
   
+  
+  def clearads
+    begin
+      puts "clear ads for #{api_params(params)[:tag]}"
+      
+      Device.destroy_all(tag: api_params(params)[:tag])
+      
+      render :json => {rtn: true}
+    rescue
+      render :json => {rtn: false}    #db error
+    end
+  end
+  
+  
   #########   For Coupons
   
   
