@@ -1,5 +1,5 @@
 
-var device="mark"
+//var device="mark"
 
 $(document).ready(function(){
 	console.log("coupons document ready")
@@ -12,10 +12,10 @@ $(document).ready(function(){
 
 function loadCoupons(){
 	
-	$.getJSON('<%= baseurl %>' + "/api/get_kept_coupons/"+device, null,
+	$.getJSON('<%= baseurl %>' + "/api/get_kept_coupons/<%= devicetag %>", null,
 			function(data){popListView(data, "CO")});
 	
-	$.getJSON('<%= baseurl %>' + "/api/get_kept_ads/"+device, null,
+	$.getJSON('<%= baseurl %>' + "/api/get_kept_ads/<%= devicetag %>", null,
 			function(data){popListView(data, "AD")});
 }
 

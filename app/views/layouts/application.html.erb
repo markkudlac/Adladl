@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
 	<% if current_page?(adunit_path(params[:prize] || "x", params[:tag] || "x")) ||
-		 					current_page?(coupons_path) then %>
+		 					current_page?(coupons_path(params[:tag] || "x")) then %>
   	<%= stylesheet_link_tag 'app_jqrymob', media: 'all', 'data-turbolinks-track' => true %>
 		<%= javascript_include_tag 'app_jqrymob', 'data-turbolinks-track' => true %>
 	<% else %>

@@ -11,7 +11,7 @@ before_action :authenticate_admin!, :only => [:test]
   def adunit
     @devicetag = params[:tag]
     
-    if (params[:prize] == "g") then
+    if (params[:prize] == "p") then
       @prizemode = true
     else
       @prizemode = false
@@ -19,6 +19,7 @@ before_action :authenticate_admin!, :only => [:test]
   end
   
   def coupons
+    @devicetag = params[:tag]
   end
   
   def test

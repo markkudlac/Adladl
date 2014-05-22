@@ -24,4 +24,4 @@
 	</div>
 				
 <%= javascript_tag(render :template => "layouts/coupons", :formats => [:js],
-	:locals => {:baseurl => geturl}) %>
+	:locals => {:baseurl => geturl, :devicetag => @devicetag}) %>

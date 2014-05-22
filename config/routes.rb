@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 get "/contact", to: "static#contact"
 get "/test", to: "static#test"
 get "/adunit/:prize/:tag", to: "static#adunit", :as => "adunit"
-get "/coupons", to: "static#coupons"
+get "/coupons/:tag", to: "static#coupons", :as => "coupons"
 get "/devices", to: "devices#index"
 get "/adverts", to: "adverts#index"
 get "/ad_lists", to: "ad_lists#index"
