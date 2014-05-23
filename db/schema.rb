@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515164648) do
+ActiveRecord::Schema.define(version: 20140523182535) do
 
   create_table "ad_lists", force: true do |t|
     t.integer  "device_id",  null: false
@@ -56,9 +56,10 @@ ActiveRecord::Schema.define(version: 20140515164648) do
   add_index "adverts", ["group"], name: "index_adverts_on_group"
 
   create_table "devices", force: true do |t|
-    t.string   "tag",        limit: 30, null: false
+    t.string   "tag",          limit: 30,             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "instruct_cnt",            default: 0
   end
 
   add_index "devices", ["tag"], name: "index_devices_on_tag", unique: true

@@ -56,6 +56,30 @@ class ApiController < ApplicationController
     get_kept "AD"
   end
   
+  
+  def get_instruct
+    device = Device.where(tag: api_params(params)[:tag])
+    
+    if device.length == 1 && device[0].instruct_cnt >= 0 then
+      render :json => {rtn: true}
+      device[0].update(instruct_cnt: device[0].instruct_cnt + 1)
+    else
+      render :json => {rtn: false}
+    end
+  end
+  
+  
+  def set_instruct
+    device = Device.where(tag: api_params(params)[:tag])
+    
+    if device.length == 1 then
+      device[0].update(instruct_cnt: api_params(params)[:cnt])
+      render :json => {rtn: true}
+    else
+      render :json => {rtn: false}
+    end
+  end
+  
   private 
   
     def set_ex_keep xcode
@@ -71,7 +95,7 @@ class ApiController < ApplicationController
         device.ad_lists.create(:advert_id => api_params(params)[:advert_id],
             :action => xcode)
         render :json => {rtn: true}
-  
+      
       rescue
         render :json => {rtn: false}
       end
@@ -92,10 +116,11 @@ class ApiController < ApplicationController
     end
     
     
+
     def api_params(xparams)
   #    puts "PARAMS PASSED : #{xparams}"
   #     xparams = xparams.require(:resolver) if xparams[:resolver]
      
-        xparams.permit(:tag, :advert_id, :lastid)
+        xparams.permit(:tag, :advert_id, :lastid, :cnt)
     end
 end

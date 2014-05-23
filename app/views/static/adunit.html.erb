@@ -3,17 +3,30 @@
 	<div id="adl0" data-role="page" class="adladlfind">
 			<div data-role="content" style="padding: 0px">
 				GET ADLADL
-			</div></div>
+			</div>
+	</div>
 			
 	<div id="adlmess" data-role="page" class="adunit">
-			<div id="adltext" data-role="none" class="adladlmess">
+			<div id="adltext" data-role="none" class="messg mess1">
 				THIS IS MESSAGE 1
-			</div></div>
+			</div>
+	</div>
 			
 	<div id="adlmess2" data-role="page" class="adunit">
-			<div id="adltext2" data-role="none" class="adladlmess">
+			<div id="adltext2" data-role="none" class="messg mess2">
 				THIS IS MESSAGE 2
-			</div></div>
+			</div>
+	</div>
+			
+	<div id="clrinst" data-role="page"  data-theme='a' class="adunit">
+		<div data-role="content" class="dismiss" >		
+			<div data-role="fieldcontain"  style="padding: 2px">
+				<fieldset data-role="controlgroup" data-iconpos="right">
+			<input type="checkbox" name="checkinst" id="checkinst" />
+			<label for="checkinst" class="chklab">Do Not Show Again</label>
+		</fieldset></div>
+		</div>
+	</div>
 				
 <%= javascript_tag(render :template => "layouts/adunit", :formats => [:js],
 	:locals => {:baseurl => geturl, :prizemode => @prizemode, :devicetag => @devicetag}) %>

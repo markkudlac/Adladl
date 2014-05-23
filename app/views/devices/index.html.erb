@@ -6,8 +6,9 @@
     <tr>
 			<th>Id</th>
       <th>Tag</th>
+			<th>Instruct Cnt</th>
 			
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -16,6 +17,7 @@
       <tr>
 				<td><%= device.id %></td>
         <td><%= device.tag %></td>
+				<td><%= device.instruct_cnt %></td>
 				
         <td><%= link_to 'Show', device %></td>
         <td><%= link_to 'Edit', edit_device_path(device) %></td>

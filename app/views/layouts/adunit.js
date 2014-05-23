@@ -7,14 +7,15 @@ var timer = null;
 var prizetimer = null;
 var prizecnt = 0;
 var prizeobj = null;
+var instructflg = 0; 
 
 $(document).ready(function(){
 	console.log("adunit document ready")
 	
 	initAjax();
+	$("#checkinst").one("change",instructClear)
 	getAds('<%= devicetag %>' , admarker);
 	
-	instructMess(0);
 })
 
 
@@ -94,6 +95,10 @@ function appendAds(data){
 		 xel, {allowSamePageTransition: true, transition: "slidedown"});
 		 
 		 beginAdScrolling();		//Begin scrollong ads
+		 
+		 if (instructflg == 0){
+			 instructNeeded()
+		 }
 	 }
 }
 
@@ -218,6 +223,11 @@ function keepAd(keepobj){
 
 
 function loadNextAd(){
+	
+	if (instructflg == 1) {
+		instructMess(0)
+		return
+	}
 	
 	xpg = $(":mobile-pagecontainer" ).pagecontainer("getActivePage").next(".adfind")
 	if (xpg.length == 0) { 
@@ -350,14 +360,69 @@ function instructMess(cnt){
 	
 	console.log("In instructMess cnt : "+cnt)
 	
+	$("#adlmess").unbind("swiperight")
+	$("#adlmess2").unbind("swiperight")
+	haltAdScrolling();
+	
 	if (cnt == 0){
-
+		$("#adltext").text("These ads can be swiped")
+		
+		$(":mobile-pagecontainer").pagecontainer("change",
+		 $("#adlmess"), {transition: "slidedown"});
 	} else if (cnt  == 1) {
-
-	} else {
+		$("#adltext2").text("Swipe right to remove")
+		
+		$(":mobile-pagecontainer").pagecontainer("change",
+		 $("#adlmess2"), {transition: "slide", reverse: true});
+		
+	} else if (cnt  == 2){
+		$("#adltext").text("Swipe left to store")
+		
+		$(":mobile-pagecontainer").pagecontainer("change",
+		 $("#adlmess"), {transition: "slide"});
+	 } else if (cnt  == 3){
+		$("#adltext2").text("Tap and hold for vault")
+		
+		$(":mobile-pagecontainer").pagecontainer("change",
+		 $("#adlmess2"), {transition: "slide"});
+	 } else {
+		
+ 		$(":mobile-pagecontainer").pagecontainer("change",
+ 		 $("#clrinst"), {transition: "slidedown"});
+		 instructflg = 2;
+		 beginAdScrolling();
 		return;
 	}
 	
 	++cnt;
-	setTimeout("instructMess(" + cnt + ")",2000)
+	setTimeout("instructMess(" + cnt + ")",3000)
+}
+
+
+function instructClear(){
+	$.mobile.loading("show")
+	instructSet(-1);
+	instructflg = 2
+}
+
+
+function instructSet(cnt){
+	
+	$.getJSON("<%= baseurl %>/api/set_instruct/<%= devicetag %>/"+cnt,null,function(data){
+		if (data && data.rtn == true) {
+//			 console.log("Instruction stopped") 
+	 	} 
+	});
+}
+
+
+function instructNeeded(){
+	
+	$.getJSON("<%= baseurl %>/api/get_instruct/<%= devicetag %>",null,function(data){
+		if (data && data.rtn == true) {
+			 instructflg = 1
+	 	} else {
+			instructflg = 2;
+		}
+	});
 }

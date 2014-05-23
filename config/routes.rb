@@ -20,8 +20,10 @@ get "/api/getads/:tag/:lastid", to: "api#getads"
 get "/api/clearads/:tag", to: "api#clearads"
 get "/api/exclude/:tag/:advert_id", to: "api#exclude"
 get "/api/keep/:tag/:advert_id", to: "api#keep"
-get "/api/get_kept_coupons/:tag/", to: "api#get_kept_coupons"
-get "/api/get_kept_ads/:tag/", to: "api#get_kept_ads"
+get "/api/get_kept_coupons/:tag", to: "api#get_kept_coupons"
+get "/api/get_kept_ads/:tag", to: "api#get_kept_ads"
+get "/api/get_instruct/:tag", to: "api#get_instruct"
+get "/api/set_instruct/:tag/:cnt", to: "api#set_instruct"
 
   # You can have the root of your site routed with "root"
    root 'static#home'
