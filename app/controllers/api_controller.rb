@@ -60,9 +60,15 @@ class ApiController < ApplicationController
   def get_instruct
     device = Device.where(tag: api_params(params)[:tag])
     
-    if device.length == 1 && device[0].instruct_cnt >= 0 then
+    if device.length == 0 then
+      device = Device.create(:tag => api_params(params)[:tag])
+    else
+      device = device[0]
+    end
+      
+    if device.instruct_cnt >= 0 then
       render :json => {rtn: true}
-      device[0].update(instruct_cnt: device[0].instruct_cnt + 1)
+      device.update(instruct_cnt: device.instruct_cnt + 1)
     else
       render :json => {rtn: false}
     end

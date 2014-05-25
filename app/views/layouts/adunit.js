@@ -7,7 +7,8 @@ var timer = null;
 var prizetimer = null;
 var prizecnt = 0;
 var prizeobj = null;
-var instructflg = 0; 
+var instructflg = 0;
+var tapnhold = false; //This is used to resolve conflict of tap and taphold
 
 $(document).ready(function(){
 	console.log("adunit document ready")
@@ -71,18 +72,9 @@ function appendAds(data){
 	
 	for (i=0; i<data.length; i++){
 
-		var xhref;
-		
-		// This is here for testing to allow local paths from different addresses
-		if (data[i].urlhref.indexOf("http:") == 0 ) {
-			xhref = data[i].urlhref
-		} else {
-			xhref = '<%= baseurl %>' + data[i].urlhref
-		}
-		
 		xel = $('<div id="pg'+data[i].id+'" data-role="page" class="adfind">'+
 			'<div data-role="content" style="padding: 0px">'+
-				'<div data-role="none" class="adunit"><a target="_blank" href="' + xhref +
+				'<div data-role="none" class="adunit"><a target="_blank" href="' + data[i].urlhref +
 				'"><img src="' + '<%= baseurl %>' + data[i].urlimg + '"></a></div></div>')
 
 				xel.page({ defaults: true })
@@ -153,15 +145,21 @@ function setEvents(jqryobj){
 		 })
 		 
 		 .tap(function(event){
-	//			event.preventDefault()
-			
-				console.log("tap event")
+				event.preventDefault()
+xhref = $(this).find('a').attr("href")
+				console.log("tap event : "+xhref)
+				if (!tapnhold) {
+					window.open(xhref, "_blank")
+				} else {
+					tapnhold=false
+				}
 		 })
 		 
 		.taphold(function(event) {  
 				event.preventDefault()
 				
-//				console.log("tap and hold event")
+				tapnhold = true;
+				console.log("tap and hold event")
 				window.open("<%= baseurl %>/coupons/<%= devicetag %>","_blank")
 				
 				if (!activePrize()){
@@ -384,7 +382,7 @@ function instructMess(cnt){
 		$("#adltext2").text("Tap and hold for vault")
 		
 		$(":mobile-pagecontainer").pagecontainer("change",
-		 $("#adlmess2"), {transition: "slide"});
+		 $("#adlmess2"), {transition: "slidedown"});
 	 } else {
 		
  		$(":mobile-pagecontainer").pagecontainer("change",
