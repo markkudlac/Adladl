@@ -1,7 +1,38 @@
 
 @import "bootstrap";
 
+body { padding-top: 70px; }
+
 .navbar-nav > li > a {
 
 	font-size: 20px;
+}
+
+.nav-pills > li > a {
+
+	font-size: 20px;
+	margin-top: 5px;
+}
+
+
+.navbar-collapse.in > ul, .navbar-collapse.collapsing > ul {
+	background-color: #DDD;
+	margin-top: 60px;
+	padding: 5px 10px 10px 10px;
+}
+
+
+.custom_top{
+	min-height: 110px;
+	background-color: #FFF
+}
+
+
+#maincont{
+	margin-top: 60px;
+	font-size: 125%;
+}
+
+.collapse_on{
+	margin-top: 125px !important;
 }
