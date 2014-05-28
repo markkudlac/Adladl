@@ -20,12 +20,20 @@
 }
 
 .mess1{
-	background-color: #F66;	
+	background-color: #99F;	
 }
 
 .mess2{
 	background-color: #6F6;
 }
+
+
+.adlauncher{
+	position: absolute;
+	bottom: 2px;
+	left: 1px;
+}
+
 
 .dismiss{
 	padding: 3px 18px !important;

@@ -2,25 +2,34 @@
 	<div id="COpage" data-role="page">
 		<div data-role="header" data-position="fixed">
 			<h1>Coupons</h1>
-			<a href="#ADpage" data-theme="b" class="ui-btn-right">Ads</a>
 		</div>
 		
 		<div  data-role="content">   
 			<ul id="COlist" data-role="listview">
 			</ul>
 		</div>
+		<div data-role="footer" class="ui-bar" data-position="fixed">
+			<a href="#ADpage" data-theme="b">Ads</a>
+		    <a href="http://www.adladl.com/contact" data-theme="b"
+					data-role="button">Contact</a>
+		  </div>
 	</div>
 		
 	<div id="ADpage" data-role="page">
 		<div data-role="header" data-position="fixed">
 			<h1>Ads</h1>
-			<a data-rel="back" data-theme="b" class="ui-btn-right">Coupons</a>
 		</div>
 	
 		<div  data-role="content">   
 			<ul id="ADlist" data-role="listview">
 			</ul>
 		</div>
+		
+		<div data-role="footer" class="ui-bar" data-position="fixed">
+			<a data-rel="back" data-theme="b">Coupons</a>
+		    <a href="http://www.adladl.com/contact" data-theme="b"
+					data-role="button">Contact</a>
+		  </div>
 	</div>
 				
 <%= javascript_tag(render :template => "layouts/coupons", :formats => [:js],
