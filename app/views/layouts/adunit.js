@@ -16,7 +16,7 @@ $(document).ready(function(){
 	initAjax();
 	$("#checkinst").one("change",instructClear)
 	getAds('<%= devicetag %>' , admarker);
-	console.log("adl : " + '<%= adlauncher %>')
+
 })
 
 
@@ -74,10 +74,9 @@ function appendAds(data){
 
 		xel = $('<div id="pg'+data[i].id+'" data-role="page" class="adfind">'+
 			'<div data-role="content" style="padding: 0px">'+
-				'<div data-role="none" class="adunit"><a target="_blank" href="' + data[i].urlhref +
+				'<a target="_blank" href="' + data[i].urlhref +
 				'"><img src="<%= baseurl %>' + data[i].urlimg + 
-				'"><%= adlauncher %></a></div></div>')
-//		'"><img src="<%= baseurl %>/assets/adlauncher.png" class="adlauncher"/></a></div></div>')
+				'"/> <%= adlauncher %> </a></div></div>')
 
 				xel.page({ defaults: true })
 				setEvents(xel)
