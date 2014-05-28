@@ -31,4 +31,5 @@
 	</div>
 				
 <%= javascript_tag(render :template => "layouts/adunit", :formats => [:js],
-	:locals => {:baseurl => geturl, :prizemode => @prizemode, :devicetag => @devicetag}) %>
+	:locals => {:baseurl => geturl, :prizemode => @prizemode,
+	:devicetag => @devicetag, :adlauncher => image_tag("adlauncher.png", class: "adlauncher")}) %>
