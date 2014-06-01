@@ -67,7 +67,7 @@ function getAds(device, ad){
 function appendAds(data){
 	
 	var xel = null;
-	
+	console.log("Base url : <%= baseurl %>")
 	if (data == undefined) return;
 	
 	for (i=0; i<data.length; i++){

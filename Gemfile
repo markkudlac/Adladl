@@ -26,7 +26,7 @@ gem 'devise', '~> 3.2.4'
 gem 'bootstrap-sass', '~> 3.1.1.1'
 gem 'exception_notification', "2.6.1"
 
-gem 'jquery_mobile_rails', '~> 1.4.1'
+gem 'jquery_mobile_rails', '~> 1.4.2'
 
 group :production do
   gem 'rails_12factor'  # This is for Heroku Rails 4
