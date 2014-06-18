@@ -86,6 +86,15 @@ class ApiController < ApplicationController
     end
   end
   
+  
+  def formupload
+#    puts "formupload for #{params[:firstname]}"
+
+    UserMailer.followup(params[:firstname], params[:email]).deliver
+    render :json => {id: api_params(params)[:id].to_i}
+  end
+  
+  
   private 
   
     def set_ex_keep xcode
@@ -127,6 +136,6 @@ class ApiController < ApplicationController
   #    puts "PARAMS PASSED : #{xparams}"
   #     xparams = xparams.require(:resolver) if xparams[:resolver]
      
-        xparams.permit(:tag, :advert_id, :lastid, :cnt)
+        xparams.permit(:tag, :advert_id, :lastid, :cnt, :id)
     end
 end
