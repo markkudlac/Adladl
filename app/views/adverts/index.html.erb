@@ -10,6 +10,7 @@
       <th>Urlimg</th>
       <th>Urlhref</th>
       <th>Descript</th>
+			<th>Icon</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <td><%= advert.urlimg %></td>
         <td><%= advert.urlhref %></td>
         <td><%= advert.descript %></td>
+				<td><%= advert.icon %></td>
         <td><%= link_to 'Show', advert %></td>
         <td><%= link_to 'Edit', edit_advert_path(advert) %></td>
         <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' } %></td>

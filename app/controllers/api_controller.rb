@@ -95,6 +95,18 @@ class ApiController < ApplicationController
   end
   
   
+  def fillnotify
+    advert = Advert.where(id: api_params(params)[:id])
+    
+    if advert.length == 1 then
+      encd_str = Base64.encode64(File.read("public/icons/"+advert[0].icon))
+      render :json => {urlhref: advert[0].urlhref, descript: advert[0].descript,
+        advert_id: advert[0].id, uploads_id: api_params(params)[:uploads_id].to_i, icon: encd_str}
+    else
+      render :json => {rtn: false}
+    end
+  end
+  
   private 
   
     def set_ex_keep xcode
@@ -136,6 +148,6 @@ class ApiController < ApplicationController
   #    puts "PARAMS PASSED : #{xparams}"
   #     xparams = xparams.require(:resolver) if xparams[:resolver]
      
-        xparams.permit(:tag, :advert_id, :lastid, :cnt, :id)
+        xparams.permit(:tag, :advert_id, :lastid, :cnt, :id, :uploads_id)
     end
 end

@@ -25,6 +25,7 @@ get "/api/get_kept_ads/:tag", to: "api#get_kept_ads"
 get "/api/get_instruct/:tag", to: "api#get_instruct"
 get "/api/set_instruct/:tag/:cnt", to: "api#set_instruct"
 get "/api/formupload/", to: "api#formupload"
+get "/api/fillnotify/:id/:uploads_id", to: "api#fillnotify"
 
   # You can have the root of your site routed with "root"
    root 'static#home'
