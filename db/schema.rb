@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624014252) do
+ActiveRecord::Schema.define(version: 20140625173830) do
 
   create_table "ad_lists", force: true do |t|
     t.integer  "device_id",  null: false
@@ -44,17 +44,36 @@ ActiveRecord::Schema.define(version: 20140624014252) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "adverts", force: true do |t|
-    t.integer  "group",                 default: 0
-    t.string   "adtype",     limit: 2,  default: "AD", null: false
-    t.string   "urlimg",                               null: false
+    t.integer  "group",                    default: 0
+    t.string   "adtype",        limit: 2,  default: "AD", null: false
+    t.string   "urlimg",                                  null: false
     t.string   "urlhref"
-    t.string   "descript",   limit: 40
+    t.string   "descript",      limit: 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "icon"
+    t.string   "icon_image"
+    t.string   "icon_filename", limit: 40
+    t.string   "ad_image"
+    t.string   "ad_filename",   limit: 40
+    t.integer  "client_id"
   end
 
+  add_index "adverts", ["client_id"], name: "index_adverts_on_client_id"
   add_index "adverts", ["group"], name: "index_adverts_on_group"
+
+  create_table "clients", force: true do |t|
+    t.integer  "admin_id",              null: false
+    t.string   "apikey",     limit: 10, null: false
+    t.string   "company",    limit: 70
+    t.string   "firstname",  limit: 40
+    t.string   "surname",    limit: 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clients", ["admin_id"], name: "index_clients_on_admin_id", unique: true
+  add_index "clients", ["apikey"], name: "index_clients_on_apikey", unique: true
 
   create_table "devices", force: true do |t|
     t.string   "tag",          limit: 30,             null: false

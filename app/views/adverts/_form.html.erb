@@ -1,4 +1,4 @@
-<%= form_for(@advert) do |f| %>
+<%= form_for @advert, html: { multipart: true } do |f| %>
   <% if @advert.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@advert.errors.count, "error") %> prohibited this advert from being saved:</h2>
@@ -20,9 +20,13 @@
     <%= f.text_field :adtype %>
   </div>
   <div class="field">
-    <%= f.label :urlimg %><br>
-    <%= f.text_field :urlimg %>
+    <%= f.label :ad_filename %><br>
+    <%= f.text_field :ad_filename %>
   </div>
+	<div class="field">
+		<%= f.label :ad_image %><br>
+		<%= f.file_field :ad_image %>
+	</div>
   <div class="field">
     <%= f.label :urlhref %><br>
     <%= f.text_field :urlhref %>
@@ -32,10 +36,11 @@
     <%= f.text_field :descript %>
   </div>
   <div class="field">
-    <%= f.label :icon %><br>
-    <%= f.text_field :icon %>
+    <%= f.label :icon_filename %><br>
+    <%= f.text_field :icon_filename %>
   </div>
-  <div class="actions">
+	
+  <div class="actions field">
     <%= f.submit %>
   </div>
 <% end %>

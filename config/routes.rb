@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
   
-  resources :devices, :adverts, :ad_lists
+  resources :devices, :adverts, :ad_lists, :clients
   
 get "/contact", to: "static#contact"
 get "/test", to: "static#test"

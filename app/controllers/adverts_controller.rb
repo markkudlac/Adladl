@@ -28,6 +28,7 @@ class AdvertsController < ApplicationController
     @advert = Advert.new(advert_params)
 
     respond_to do |format|
+      puts "In Adverts Create"
       if @advert.save
         format.html { redirect_to @advert, notice: 'Advert was successfully created.' }
         format.json { render :show, status: :created, location: @advert }
@@ -41,6 +42,7 @@ class AdvertsController < ApplicationController
   # PATCH/PUT /adverts/1
   # PATCH/PUT /adverts/1.json
   def update
+    puts "In Adverts Update"
     respond_to do |format|
       if @advert.update(advert_params)
         format.html { redirect_to @advert, notice: 'Advert was successfully updated.' }
@@ -70,6 +72,6 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:group, :adtype, :urlimg, :urlhref, :descript, :icon)
+      params.require(:advert).permit(:group, :adtype, :ad_image, :urlhref, :descript, :icon_image)
     end
 end
