@@ -1,0 +1,31 @@
+<h1>Listing icons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Client</th>
+      <th>Filename</th>
+      <th>Filesize</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @icons.each do |icon| %>
+      <tr>
+        <td><%= icon.id %></td>
+        <td><%= icon.client_id %></td>
+        <td><%= icon.filename %></td>
+        <td><%= icon.filesize %></td>
+        <td><%= link_to 'Show', icon %></td>
+        <td><%= link_to 'Edit', edit_icon_path(icon) %></td>
+        <td><%= link_to 'Destroy', icon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Icon', new_icon_path %>

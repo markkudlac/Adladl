@@ -17,28 +17,30 @@
   </div>
   <div class="field">
     <%= f.label :adtype %><br>
-    <%= f.text_field :adtype %>
+    <%= f.text_field :adtype, :size=>"2", :maxlength=>"2" %>
   </div>
   <div class="field">
-    <%= f.label :ad_filename %><br>
-    <%= f.text_field :ad_filename %>
+    <%= f.label :filename %><br>
+    <%= f.text_field :filename, :disabled => true, :size=>"40" %>
   </div>
 	<div class="field">
-		<%= f.label :ad_image %><br>
-		<%= f.file_field :ad_image %>
+		<%= f.label :image %><br>
+		<%= f.file_field :image %>
 	</div>
   <div class="field">
     <%= f.label :urlhref %><br>
-    <%= f.text_field :urlhref %>
+    <%= f.text_field :urlhref, :size=>"50" %>
   </div>
+	
   <div class="field">
     <%= f.label :descript %><br>
-    <%= f.text_field :descript %>
+    <%= f.text_field :descript, :size=>"40", :maxlength=>"40" %>
   </div>
-  <div class="field">
-    <%= f.label :icon_filename %><br>
-    <%= f.text_field :icon_filename %>
-  </div>
+	
+	<div class="field">
+		<%= f.label :icon %><br>
+		<%= f.collection_select :icon_id, @icon, "id", "filename" %>
+	</div>
 	
   <div class="actions field">
     <%= f.submit %>

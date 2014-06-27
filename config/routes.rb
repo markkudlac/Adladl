@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :icons
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   devise_for :admins
   
-  resources :devices, :adverts, :ad_lists, :clients
+  resources :devices, :adverts, :ad_lists, :clients, :icons
   
 get "/contact", to: "static#contact"
 get "/test", to: "static#test"

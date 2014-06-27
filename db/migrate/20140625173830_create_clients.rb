@@ -8,7 +8,6 @@ class CreateClients < ActiveRecord::Migration
       t.string :surname,      :limit => 40
       
       t.timestamps
-      
     end
     
     add_index :clients, :admin_id, :unique => true

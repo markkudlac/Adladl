@@ -1,3 +1,7 @@
+<div class="scaffold">
+
+<h1>Listing Adverts : <%= @advert.id %></h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -11,8 +15,18 @@
 </p>
 
 <p>
+  <strong>Filename:</strong>
+  <%= @advert.filename %>
+</p>
+
+<p>
+  <strong>File Size:</strong>
+  <%= @advert.filesize %>
+</p>
+
+<p>
   <strong>Urlimg:</strong>
-  <%= @advert.urlimg %>
+  <%= @advert.image %>
 </p>
 
 <p>
@@ -27,8 +41,10 @@
 
 <p>
   <strong>Icon:</strong>
-  <%= @advert.icon %>
+  <%= @advert.icon_id %>
 </p>
 
 <%= link_to 'Edit', edit_advert_path(@advert) %> |
 <%= link_to 'Back', adverts_path %>
+
+</div>

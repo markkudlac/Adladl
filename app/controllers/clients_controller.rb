@@ -10,15 +10,7 @@ before_action :authenticate_admin!
   end
   
   def create
-    upload = client_params(params)[:ad_image]
-    
-    encd_str = Base64.encode64(File.read(upload.path()))
-      
-    render :json => {
-            file: upload.original_filename,
-            mime: upload.content_type,
-            ad_image: encd_str
-          }
+
   end
   
   
@@ -28,6 +20,6 @@ before_action :authenticate_admin!
 #    puts "PARAMS PASSED : #{xparams}"
      xparams = xparams.require(:client) if xparams[:client]
    
-      xparams.permit(:ad_image, :firstname)
+      xparams.permit(:company, :firstname)
   end
 end

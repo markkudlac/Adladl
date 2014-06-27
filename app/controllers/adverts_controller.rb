@@ -15,20 +15,28 @@ class AdvertsController < ApplicationController
 
   # GET /adverts/new
   def new
+    @icon =  Icon.all
     @advert = Advert.new
   end
 
   # GET /adverts/1/edit
   def edit
+    @icon =  Icon.all
   end
 
   # POST /adverts
   # POST /adverts.json
   def create
+    
     @advert = Advert.new(advert_params)
+    upload = @advert[:image]
+    @advert[:image] = Base64.encode64(File.read(upload.path()))
 
+    @advert[:filename] = upload.original_filename
+    @advert[:filesize] = upload.size
+    @advert[:client_id] = current_admin.id
+    
     respond_to do |format|
-      puts "In Adverts Create"
       if @advert.save
         format.html { redirect_to @advert, notice: 'Advert was successfully created.' }
         format.json { render :show, status: :created, location: @advert }
@@ -42,9 +50,20 @@ class AdvertsController < ApplicationController
   # PATCH/PUT /adverts/1
   # PATCH/PUT /adverts/1.json
   def update
-    puts "In Adverts Update"
+     
+    newparams = advert_params
+    upload = newparams[:image]
+    
+   puts "In Adverts Update icon : #{newparams[:icon_id]}"
+   
+   if !upload.nil? then
+     newparams[:image] = Base64.encode64(File.read(upload.path()))
+     newparams[:filename] = upload.original_filename
+     newparams[:filesize] = upload.size
+   end
+    
     respond_to do |format|
-      if @advert.update(advert_params)
+      if @advert.update(newparams)
         format.html { redirect_to @advert, notice: 'Advert was successfully updated.' }
         format.json { render :show, status: :ok, location: @advert }
       else
@@ -72,6 +91,6 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:group, :adtype, :ad_image, :urlhref, :descript, :icon_image)
+      params.require(:advert).permit(:group, :adtype, :image, :urlhref, :descript, :icon_id)
     end
 end

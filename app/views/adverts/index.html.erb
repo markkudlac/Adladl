@@ -1,4 +1,4 @@
-<h1>Listing adverts</h1>
+<h1>Listing Adverts</h1>
 <%= render "layouts/scaffoldnav"%>
 
 <table>
@@ -10,7 +10,7 @@
       <th>Ad File</th>
       <th>Urlhref</th>
       <th>Descript</th>
-			<th>Icon File</th>
+			<th>Icon</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,10 +21,10 @@
 				<td><%= advert.id %></td>
         <td><%= advert.group %></td>
         <td><%= advert.adtype %></td>
-        <td><%= advert.ad_filename %></td>
+        <td><%= advert.filename %></td>
         <td><%= advert.urlhref %></td>
         <td><%= advert.descript %></td>
-				<td><%= advert.icon_filename %></td>
+				<td><%= advert.icon_id %></td>
         <td><%= link_to 'Show', advert %></td>
         <td><%= link_to 'Edit', edit_advert_path(advert) %></td>
         <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' } %></td>

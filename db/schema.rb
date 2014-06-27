@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625173830) do
+ActiveRecord::Schema.define(version: 20140626145153) do
 
   create_table "ad_lists", force: true do |t|
     t.integer  "device_id",  null: false
@@ -44,19 +44,18 @@ ActiveRecord::Schema.define(version: 20140625173830) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "adverts", force: true do |t|
-    t.integer  "group",                    default: 0
-    t.string   "adtype",        limit: 2,  default: "AD", null: false
-    t.string   "urlimg",                                  null: false
+    t.integer  "group",                 default: 0
+    t.string   "adtype",     limit: 2,  default: "AD", null: false
     t.string   "urlhref"
-    t.string   "descript",      limit: 40
+    t.string   "descript",   limit: 40
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "icon"
-    t.string   "icon_image"
-    t.string   "icon_filename", limit: 40
-    t.string   "ad_image"
-    t.string   "ad_filename",   limit: 40
-    t.integer  "client_id"
+    t.integer  "icon_id",               default: -1
+    t.integer  "landing_id",            default: -1
+    t.text     "image",                                null: false
+    t.string   "filename",   limit: 40
+    t.integer  "filesize"
+    t.integer  "client_id",                            null: false
   end
 
   add_index "adverts", ["client_id"], name: "index_adverts_on_client_id"
@@ -83,5 +82,16 @@ ActiveRecord::Schema.define(version: 20140625173830) do
   end
 
   add_index "devices", ["tag"], name: "index_devices_on_tag", unique: true
+
+  create_table "icons", force: true do |t|
+    t.integer  "client_id",             null: false
+    t.text     "image",                 null: false
+    t.string   "filename",   limit: 40
+    t.integer  "filesize"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "icons", ["client_id"], name: "index_icons_on_client_id"
 
 end

@@ -19,6 +19,7 @@
 		      <li class="active"><a href="#">Signed In</a></li>
 			  	<li><%= link_to "Home", root_path %></li>
 					<li><%= link_to "Adverts", adverts_path %></li>
+					<li><%= link_to "Icons", icons_path %></li>
 					<li><%= link_to "Sign out", destroy_admin_session_path, :method => :delete %></li>
 			</ul>
 		</div>
@@ -31,12 +32,6 @@
 			<p>Client Apikey : <%= @client.apikey %></p>
 			<p>Company Name  : <%= @client.company %></p>
 			
-			<p>
-			<%= form_for @client, url: {action: "create"}, html: { multipart: true, method: "post" } do |f| %>
-				<%= f.file_field :ad_image %>
-				<%= f.submit "SUBMIT" %>
-			<% end %>
-		</p>
 		
 		</div>
 	</div>

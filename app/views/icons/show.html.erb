@@ -1,0 +1,31 @@
+
+<div class="scaffold">
+
+<h1>Listing Icon : <%= @icon.id %></h1>
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Client:</strong>
+  <%= @icon.client_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @icon.image %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @icon.filename %>
+</p>
+
+<p>
+  <strong>Filesize:</strong>
+  <%= @icon.filesize %>
+</p>
+
+<%= link_to 'Edit', edit_icon_path(@icon) %> |
+<%= link_to 'Back', icons_path %>
+
+</div>
