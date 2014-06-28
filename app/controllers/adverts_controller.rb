@@ -15,13 +15,13 @@ class AdvertsController < ApplicationController
 
   # GET /adverts/new
   def new
-    @icon =  Icon.all
+    @icon =  Icon.where(:client_id => current_admin.id)
     @advert = Advert.new
   end
 
   # GET /adverts/1/edit
   def edit
-    @icon =  Icon.all
+    @icon =  Icon.where(:client_id => current_admin.id)
   end
 
   # POST /adverts
@@ -30,11 +30,18 @@ class AdvertsController < ApplicationController
     
     @advert = Advert.new(advert_params)
     upload = @advert[:image]
-    @advert[:image] = Base64.encode64(File.read(upload.path()))
-
-    @advert[:filename] = upload.original_filename
-    @advert[:filesize] = upload.size
+    
+    if !upload.nil? then
+      @advert[:image] = Base64.encode64(File.read(upload.path()))
+      @advert[:filename] = upload.original_filename
+      @advert[:filesize] = upload.size
+    end
+    
     @advert[:client_id] = current_admin.id
+    
+    if advert_params[:icon_id].length <= 0 then
+      @advert[:icon_id] = -1
+    end
     
     respond_to do |format|
       if @advert.save
@@ -54,13 +61,17 @@ class AdvertsController < ApplicationController
     newparams = advert_params
     upload = newparams[:image]
     
-   puts "In Adverts Update icon : #{newparams[:icon_id]}"
-   
+#   puts "In Adverts Update icon : #{newparams[:icon_id]}"
+    if newparams[:icon_id].length <= 0 then
+      newparams[:icon_id]= -1
+    end
+    
    if !upload.nil? then
      newparams[:image] = Base64.encode64(File.read(upload.path()))
      newparams[:filename] = upload.original_filename
      newparams[:filesize] = upload.size
    end
+    
     
     respond_to do |format|
       if @advert.update(newparams)

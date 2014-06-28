@@ -99,7 +99,17 @@ class ApiController < ApplicationController
     advert = Advert.where(id: api_params(params)[:id])
     
     if advert.length == 1 then
-      encd_str = Base64.encode64(File.read("public/icons/"+advert[0].icon))
+      icon = Icon.find_by_id(advert[0].icon_id)   #do this so no exception thrown
+      if icon.nil? then
+        defpath = view_context.asset_path "defaulticon.gif"
+        if Rails.env.development? then
+          defpath = "app/assets/images/defaulticon.gif"
+        end
+        encd_str = Base64.encode64(File.read(defpath))
+      else
+        encd_str = icon.image
+      end
+      
       render :json => {urlhref: advert[0].urlhref, descript: advert[0].descript,
         advert_id: advert[0].id, uploads_id: api_params(params)[:uploads_id].to_i, icon: encd_str}
     else

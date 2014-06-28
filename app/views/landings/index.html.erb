@@ -1,0 +1,31 @@
+<h1>Listing Landings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Client</th>
+      <th>Filename</th>
+      <th>Filesize</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @landings.each do |landing| %>
+      <tr>
+        <td><%= landing.id %></td>
+        <td><%= landing.client_id %></td>
+        <td><%= landing.filename %></td>
+        <td><%= landing.filesize %></td>
+        <td><%= link_to 'Show', landing %></td>
+        <td><%= link_to 'Edit', edit_landing_path(landing) %></td>
+        <td><%= link_to 'Destroy', landing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Landing', new_landing_path %>

@@ -39,7 +39,8 @@
 	
 	<div class="field">
 		<%= f.label :icon %><br>
-		<%= f.collection_select :icon_id, @icon, "id", "filename" %>
+		<%= f.collection_select :icon_id, @icon, :id, :filename, 
+			{:include_blank => "Select Icon" } %>
 	</div>
 	
   <div class="actions field">

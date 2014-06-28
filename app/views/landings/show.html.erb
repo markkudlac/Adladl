@@ -1,0 +1,31 @@
+
+<div class="scaffold">
+
+<h1>Listing Landing : <%= @landing.id %></h1>
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Client:</strong>
+  <%= @landing.client_id %>
+</p>
+
+<p>
+  <strong>Zipfile:</strong>
+  <%= @landing.zipfile.slice(0,250) %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @landing.filename %>
+</p>
+
+<p>
+  <strong>Filesize:</strong>
+  <%= @landing.filesize %>
+</p>
+
+<%= link_to 'Edit', edit_landing_path(@landing) %> |
+<%= link_to 'Back', landings_path %>
+
+</div>
