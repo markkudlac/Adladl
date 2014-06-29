@@ -41,6 +41,11 @@
 		<%= f.label :icon %><br>
 		<%= f.collection_select :icon_id, @icon, :id, :filename, 
 			{:include_blank => "Select Icon" } %>
+			
+	<div class="field">
+		<%= f.label :zipfile %><br>
+				<%= f.collection_select :landing_id, @landing, :id, :zipname, 
+					{:include_blank => "Select Landing Zipfile" } %>
 	</div>
 	
   <div class="actions field">

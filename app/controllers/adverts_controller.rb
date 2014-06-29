@@ -2,32 +2,30 @@ class AdvertsController < ApplicationController
   before_action :set_advert, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
   
-  # GET /adverts
-  # GET /adverts.json
+
   def index
     @adverts = Advert.all
   end
 
-  # GET /adverts/1
-  # GET /adverts/1.json
+
   def show
   end
 
-  # GET /adverts/new
+
   def new
     @icon =  Icon.where(:client_id => current_admin.id)
+    @landing =  Landing.where(:client_id => current_admin.id)
     @advert = Advert.new
   end
 
-  # GET /adverts/1/edit
+
   def edit
     @icon =  Icon.where(:client_id => current_admin.id)
+    @landing =  Landing.where(:client_id => current_admin.id)
   end
 
-  # POST /adverts
-  # POST /adverts.json
+
   def create
-    
     @advert = Advert.new(advert_params)
     upload = @advert[:image]
     
@@ -38,9 +36,12 @@ class AdvertsController < ApplicationController
     end
     
     @advert[:client_id] = current_admin.id
-    
     if advert_params[:icon_id].length <= 0 then
       @advert[:icon_id] = -1
+    end
+    
+    if advert_params[:landing_id].length <= 0 then
+      @advert[:landind_id] = -1
     end
     
     respond_to do |format|
@@ -54,16 +55,18 @@ class AdvertsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /adverts/1
-  # PATCH/PUT /adverts/1.json
+
   def update
-     
     newparams = advert_params
     upload = newparams[:image]
     
 #   puts "In Adverts Update icon : #{newparams[:icon_id]}"
     if newparams[:icon_id].length <= 0 then
       newparams[:icon_id]= -1
+    end
+    
+    if newparams[:landing_id].length <= 0 then
+      newparams[:landing_id]= -1
     end
     
    if !upload.nil? then
@@ -84,8 +87,7 @@ class AdvertsController < ApplicationController
     end
   end
 
-  # DELETE /adverts/1
-  # DELETE /adverts/1.json
+
   def destroy
     @advert.destroy
     respond_to do |format|
@@ -93,6 +95,7 @@ class AdvertsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -102,6 +105,7 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:group, :adtype, :image, :urlhref, :descript, :icon_id)
+      params.require(:advert).permit(:group, :adtype, :image, :urlhref,
+       :descript, :icon_id, :landing_id)
     end
 end

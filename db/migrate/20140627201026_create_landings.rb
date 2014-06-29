@@ -3,7 +3,7 @@ class CreateLandings < ActiveRecord::Migration
     create_table :landings do |t|
       t.integer :client_id,   :null => false
       t.text :zipfile,          :null => false
-      t.string :filename,     :limit => 40
+      t.string :zipname,     :limit => 40
       t.integer :filesize
       
       t.timestamps

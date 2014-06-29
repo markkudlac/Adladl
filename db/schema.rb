@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20140627201026) do
   create_table "landings", force: true do |t|
     t.integer  "client_id",             null: false
     t.text     "zipfile",               null: false
-    t.string   "filename",   limit: 40
+    t.string   "zipname",    limit: 40
     t.integer  "filesize"
     t.datetime "created_at"
     t.datetime "updated_at"

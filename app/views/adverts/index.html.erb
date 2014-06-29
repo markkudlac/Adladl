@@ -5,12 +5,13 @@
   <thead>
     <tr>
 			<th>Id</th>
-      <th>Group</th>
-      <th>Type</th>
+      <th>Grp</th>
+      <th>Tp</th>
       <th>Ad File</th>
       <th>Urlhref</th>
       <th>Descript</th>
 			<th>Icon</th>
+			<th>Land</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
         <td><%= advert.urlhref %></td>
         <td><%= advert.descript %></td>
 				<td><%= advert.icon_id %></td>
+				<td><%= advert.landing_id %></td>
         <td><%= link_to 'Show', advert %></td>
         <td><%= link_to 'Edit', edit_advert_path(advert) %></td>
         <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,1 +1,1 @@
-json.extract! @landing, :id, :filename, :filesize, :created_at, :updated_at
+json.extract! @landing, :id, :zipname, :filesize, :created_at, :updated_at

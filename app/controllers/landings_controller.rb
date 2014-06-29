@@ -21,7 +21,7 @@ class LandingsController < ApplicationController
     upload = @landing[:zipfile]
     @landing[:zipfile] = Base64.encode64(File.read(upload.path()))
 
-    @landing[:filename] = upload.original_filename
+    @landing[:zipname] = upload.original_filename
     @landing[:filesize] = upload.size
     @landing[:client_id] = current_admin.id
     
@@ -45,7 +45,7 @@ class LandingsController < ApplicationController
    
      if !upload.nil? then
        newparams[:zipfile] = Base64.encode64(File.read(upload.path()))
-       newparams[:filename] = upload.original_filename
+       newparams[:zipname] = upload.original_filename
        newparams[:filesize] = upload.size
      end
     
@@ -77,6 +77,6 @@ class LandingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landing_params
-      params.require(:landing).permit(:zipfile, :filename, :filesize)
+      params.require(:landing).permit(:zipfile, :zipname, :filesize)
     end
 end

@@ -3,15 +3,29 @@ class ApiController < ApplicationController
   def getads
     begin
       ad_ids = AdList.joins(:device).where("devices.tag = ?", api_params(params)[:tag])
-      
+    
       if (ad_ids.length == 0) then
         ad_ids = [0]    #This is a bit dumb but works
       else
         ad_ids = ad_ids.pluck(:advert_id)
       end
       
-      ads = Advert.where("id > ? AND id NOT IN ( ? )",
-      api_params(params)[:lastid], ad_ids).limit(20)
+# This is a bit dumb but could not get param to pass properly on multiple items to exec
+      adstr = ad_ids.to_s
+      adstr = adstr.slice(1, adstr.length-2)
+      
+      qrystr = "SELECT adverts.id, adverts.filename, adverts.urlhref, adverts.adtype, " +
+      "adverts.image, landings.zipfile, landings.zipname FROM adverts " +
+      "LEFT OUTER JOIN landings ON landings.id = adverts.landing_id " + 
+      "WHERE adverts.id > ? AND adverts.id NOT IN ( " + adstr + " ) LIMIT 20"
+
+#      puts "QRYSTR : #{qrystr}"
+
+      ads = ActiveRecord::Base.connection.raw_connection.prepare(qrystr) 
+       ads = ads.execute(api_params(params)[:lastid])
+       
+#      ads = Advert.where("adverts.id > ? AND adverts.id NOT IN ( ? )",
+#      api_params(params)[:lastid], ad_ids).limit(20)
       
       render :json => ads
     
