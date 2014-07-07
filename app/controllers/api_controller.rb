@@ -13,17 +13,24 @@ class ApiController < ApplicationController
 # This is a bit dumb but could not get param to pass properly on multiple items to exec
       adstr = ad_ids.to_s
       adstr = adstr.slice(1, adstr.length-2)
+
+# Building the string to get around parameter difs with PostGress
       
       qrystr = "SELECT adverts.id, adverts.filename, adverts.urlhref, adverts.adtype, " +
       "adverts.image, landings.zipfile, landings.zipname FROM adverts " +
       "LEFT OUTER JOIN landings ON landings.id = adverts.landing_id " + 
-      "WHERE adverts.id > ? AND adverts.id NOT IN ( " + adstr + " ) LIMIT 20"
+      "WHERE adverts.id > " + api_params(params)[:lastid] + 
+      " AND adverts.id NOT IN ( " + adstr + " ) LIMIT 20"
 
 #      puts "QRYSTR : #{qrystr}"
-
-      ads = ActiveRecord::Base.connection.raw_connection.prepare(qrystr) 
-       ads = ads.execute(api_params(params)[:lastid])
-       
+      if Rails.env.production? then
+        conn = ActiveRecord::Base.connection.raw_connection
+        conn.prepare('pg_qry', qrystr) 
+        ads = conn.exec_prepared('pg_qry')
+      else
+        ads = ActiveRecord::Base.connection.raw_connection.prepare(qrystr) 
+        ads = ads.execute()
+      end
 #      ads = Advert.where("adverts.id > ? AND adverts.id NOT IN ( ? )",
 #      api_params(params)[:lastid], ad_ids).limit(20)
       
