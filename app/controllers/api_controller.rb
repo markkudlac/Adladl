@@ -102,9 +102,10 @@ class ApiController < ApplicationController
   
   
   def formupload
-#    puts "formupload for #{params[:firstname]}"
+    puts "formupload for #{params[:adl_id]}"
 
-    UserMailer.followup(params[:firstname], params[:email]).deliver
+    UserMailer.followup(params[:adl_id], params[:firstname],  
+      params[:email]).deliver
     render :json => {uploads_id: api_params(params)[:uploads_id].to_i}
   end
   

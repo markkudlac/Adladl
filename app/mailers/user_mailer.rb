@@ -6,9 +6,26 @@ class UserMailer < ActionMailer::Base
   #
   #   en.user_mailer.followup.subject
   #
-  def followup fname, email
+  def followup advert_id, fname, email
     @fname = fname
-
-    mail to: email, subject: "Follow up"
+    subject = "Follow Up"
+    
+    begin
+      advert = Advert.find(advert_id)
+      @href = advert.urlhref
+      
+      mimetype = advert.filename.split('.')
+      mimetype = mimetype[mimetype.length-1]
+      @src = "data:image/"+ mimetype +";base64,"+advert.image
+      if (!advert.descript.nil? && advert.descript.length > 0) then
+        subject = advert.descript
+      end
+      
+    rescue
+      @href = "#"
+      @src = ""
+    end
+    
+    mail to: email, subject: subject
   end
 end
