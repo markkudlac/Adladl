@@ -41,7 +41,7 @@ class AdvertsController < ApplicationController
     end
     
     if advert_params[:landing_id].length <= 0 then
-      @advert[:landind_id] = -1
+      @advert[:landing_id] = -1
     end
     
     respond_to do |format|
