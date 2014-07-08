@@ -23,10 +23,11 @@ class ApiController < ApplicationController
       " AND adverts.id NOT IN ( " + adstr + " ) LIMIT 20"
 
 #      puts "QRYSTR : #{qrystr}"
-      if Rails.env.production? then
+      if Rails.env.production? then     # For PostGresql
         conn = ActiveRecord::Base.connection.raw_connection
-        conn.prepare('pg_qry', qrystr) 
-        ads = conn.exec_prepared('pg_qry')
+        conn.prepare('pg_ads', qrystr) 
+        ads = conn.exec_prepared('pg_ads')
+        conn.exec('DEALLOCATE pg_ads')
       else
         ads = ActiveRecord::Base.connection.raw_connection.prepare(qrystr) 
         ads = ads.execute()
