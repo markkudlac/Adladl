@@ -16,13 +16,17 @@ class UserMailer < ActionMailer::Base
       
       mimetype = advert.filename.split('.')
       mimetype = mimetype[mimetype.length-1]
-      @src = "data:image/"+ mimetype +";base64,"+advert.image
+      @srcb64 = "data:image/"+ mimetype +";base64,"+advert.image
+      
+      @src = "http://www.adladl.com/api/getimage/#{advert.id}/#{advert.filename}"
+      
       if (!advert.descript.nil? && advert.descript.length > 0) then
         subject = advert.descript
       end
       
     rescue
       @href = "#"
+      @srcb64 = ""
       @src = ""
     end
     

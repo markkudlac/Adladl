@@ -66,6 +66,7 @@ class ApiController < ApplicationController
   end
   
   
+
   #########   For Coupons
   
   
@@ -139,6 +140,23 @@ class ApiController < ApplicationController
       render :json => {rtn: false}
     end
   end
+  
+  
+  def getimage
+    advert = Advert.where(id: api_params(params)[:id])
+    if advert.length == 1 then
+      decd_str = Base64.decode64(advert[0].image)
+      mimetype = advert[0].filename.split('.')
+      mimetype = mimetype[mimetype.length-1]
+    else
+      decd_str = File.read("app/assets/images/defaulticon.gif")
+      mimetype = "gif"
+    end
+    
+    send_data decd_str, type: 'image/'+mimetype, disposition: 'inline'
+
+  end
+  
   
   private 
   
