@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 0.4.0',          group: :doc
 
-gem 'devise', '~> 3.2.4'
+gem 'devise', '~> 3.4.1'
 gem 'bootstrap-sass', '~> 3.1.1.1'
 gem 'exception_notification', "2.6.1"
 
@@ -34,7 +34,7 @@ group :production do
 end
 
 group :development do
-  
+  gem 'web-console', '~> 2.0'
   gem 'spring'  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 
   gem 'sqlite3'
@@ -46,6 +46,6 @@ group :development do
   gem 'letter_opener', "~> 1.0.0"    # This is for mail delivery to browser for testing
 end
 
-ruby '2.0.0'    
+ruby '2.2.0'    
 
 

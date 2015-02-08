@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 before_action :authenticate_admin!
 
   def show
-#    puts "admin id : #{current_admin_id}"
+#    puts "admin id : #{current_admin.id}"
     
     @client = Client.where(admin_id: current_admin.id)[0]
     
